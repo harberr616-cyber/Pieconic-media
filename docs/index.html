@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PieconicFL: handwrought pies, empanadas and the one-of-a-kind Stuffanada. Coming soon to St. Augustine, FL.">
+<link rel="icon" href="img/logo-sm.png">
+<title>PieconicFL</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Roboto+Slab:wght@500;700;800&family=Karla:wght@400;500;700&display=swap">
+<style>
+/* Layout: a malt-shop menu board. Wide hero badge, a checkerboard band between chapters, then single-purpose sections that stack to one column on phones. */
+:root{
+  --paper:#FBF4E8; --card:#FFFDF8; --ink:#3E2219; --ink-soft:#6E4A3D;
+  --crust:#C8693D; --butter:#F5E1BE; --mint:#7CC9C0; --mint-ink:#1F5C56; --cherry:#D64B50;
+  --line:rgba(62,34,25,.16);
+  --f-display:"Shrikhand","Cooper Black",Georgia,serif;
+  --f-head:"Roboto Slab",Rockwell,Georgia,serif;
+  --f-body:"Karla","Helvetica Neue",Arial,sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1D1310; --card:#2A1C17; --ink:#F7E9D6; --ink-soft:#CDB49F;
+  --crust:#E58A5A; --butter:#4A3024; --mint:#6CBDB3; --mint-ink:#BDEDE7; --cherry:#EE6A6E;
+  --line:rgba(247,233,214,.16); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#1D1310; --card:#2A1C17; --ink:#F7E9D6; --ink-soft:#CDB49F;
+  --crust:#E58A5A; --butter:#4A3024; --mint:#6CBDB3; --mint-ink:#BDEDE7; --cherry:#EE6A6E;
+  --line:rgba(247,233,214,.16); color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+h1,h2,h3{font-family:var(--f-head);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-head);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;color:var(--crust)}
+.script{font-family:var(--f-display);font-weight:400;color:var(--crust)}
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:12px;max-width:640px;margin-bottom:36px}
+.sec-head p{color:var(--ink-soft)}
+
+/* template notice */
+.notice{background:var(--ink);color:var(--paper);font-size:.85rem;text-align:center;padding-block:8px}
+.notice b{color:var(--butter)}
+:root[data-theme="dark"] .notice b{color:var(--crust)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .notice b{color:var(--crust)}}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-head);font-weight:800;font-size:1.15rem}
+.brand img{width:44px;height:44px;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 auto;padding:0;font-weight:500;font-size:.95rem}
+.nav ul a{text-decoration:none}
+.nav ul a:hover{color:var(--crust)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-head);font-weight:700;font-size:.95rem;padding:12px 20px;border-radius:999px;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.nav .btn{padding:8px 16px;font-size:.85rem}
+@media (max-width:860px){.nav ul{display:none}.nav .btn{margin-left:auto}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,80px) clamp(48px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2.8rem,7.4vw,5.4rem);line-height:1.02;color:var(--ink)}
+.hero h1 span{color:var(--crust);display:block}
+.hero .lede{font-size:1.2rem;color:var(--ink-soft);max-width:34ch;margin-top:20px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:#16413D;font-family:var(--f-head);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:18px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--cherry);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.badge{position:relative;justify-self:center;width:min(420px,100%)}
+.badge::before{content:"";position:absolute;inset:-5%;border-radius:50%;background:var(--butter);z-index:-1}
+.badge img{width:100%;display:block;border-radius:50%;box-shadow:0 18px 40px rgba(62,34,25,.18);animation:spin-in 1.1s cubic-bezier(.2,.8,.2,1)}
+@keyframes spin-in{from{transform:rotate(-14deg) scale(.92)}to{transform:none}}
+.stamp{position:absolute;right:-4%;bottom:6%;background:var(--cherry);color:#fff;font-family:var(--f-display);font-size:1.05rem;padding:10px 16px;border-radius:10px;transform:rotate(-8deg);box-shadow:0 6px 0 rgba(0,0,0,.18)}
+@media (max-width:780px){.hero .wrap{grid-template-columns:1fr}.badge{order:-1;width:min(280px,80%)}}
+
+/* checker band */
+.checker{height:28px;background-color:var(--paper);background-image:conic-gradient(var(--mint) 25%,transparent 0 50%,var(--mint) 0 75%,transparent 0);background-size:28px 28px}
+.marquee{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;font-family:var(--f-head);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.9rem;padding-block:12px}
+.marquee div{display:inline-block;animation:slide 38s linear infinite}
+.marquee span{margin:0 22px}
+.marquee em{font-style:normal;color:var(--crust)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* stuffanada */
+.stuff .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.stuff figure{margin:0;position:relative}
+.stuff figure img{width:100%;display:block;border-radius:28px;box-shadow:0 20px 50px rgba(62,34,25,.22)}
+.stuff figure figcaption{position:absolute;left:16px;bottom:16px;background:var(--cherry);color:#fff;font-family:var(--f-display);padding:8px 14px;border-radius:10px;transform:rotate(-4deg)}
+.equation{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:24px 0;font-family:var(--f-head);font-weight:700;font-size:1.1rem}
+.equation .t{border:2px solid var(--ink);border-radius:999px;padding:6px 16px}
+.equation .t.win{background:var(--crust);border-color:var(--crust);color:#fff;font-family:var(--f-display);font-weight:400}
+.stuff ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
+.stuff li{display:flex;gap:12px;align-items:baseline}
+.stuff li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--mint);transform:translateY(-1px)}
+@media (max-width:780px){.stuff .wrap{grid-template-columns:1fr}}
+
+/* menu board */
+.menu{background:var(--card);border-block:1px solid var(--line)}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:var(--paper)}
+.col{padding:28px;display:grid;gap:14px;align-content:start}
+.col{border-top:2px dashed var(--line)}.col:nth-child(-n+3){border-top:0}.col:not(:nth-child(3n+1)){border-left:2px dashed var(--line)}
+.col img{width:calc(100% + 56px);margin:-28px -28px 4px;aspect-ratio:4/3;object-fit:cover;display:block;max-width:none}
+.col h3{font-family:var(--f-display);font-weight:400;font-size:1.7rem;color:var(--crust)}
+.col .sub{font-size:.9rem;color:var(--ink-soft);margin-top:-8px}
+.item{display:flex;align-items:baseline;gap:8px}
+.item b{font-family:var(--f-head);font-weight:700}
+.item .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+.item small{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mint-ink);font-weight:700}
+.tagline{margin-top:18px;font-size:.9rem;color:var(--ink-soft)}
+@media (max-width:860px){.board{grid-template-columns:1fr}.board .col{border-left:0;border-top:2px dashed var(--line)}.board .col:first-child{border-top:0}}
+
+/* shop */
+.shop figure{margin:0}
+.shop .wide img{width:100%;border-radius:24px;display:block;aspect-ratio:16/9;object-fit:cover}
+.shop .wide figcaption{margin-top:10px;color:var(--ink-soft);font-size:.95rem}
+.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.views figure{position:relative;border-radius:20px;overflow:hidden}
+.views img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .4s}
+.views figure:hover img{transform:scale(1.04)}
+.views figcaption{position:absolute;inset:auto 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(30,15,10,.85));color:#fff;font-size:.9rem;display:grid;gap:2px}
+.views figcaption b{font-family:var(--f-head);font-size:1.05rem}
+@media (max-width:820px){.views{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.views{grid-template-columns:1fr}}
+.shop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.zone{border-radius:18px;padding:22px;display:grid;gap:8px;align-content:start;min-height:170px;color:#2B1712}
+.zone h3{font-size:1.1rem}
+.zone p{font-size:.95rem}
+.z1{background:#F2B6C6}.z2{background:#F2C14E}.z3{background:#7CC9C0}.z4{background:#E39A6B}
+.z5{background:#B9A2E8}.z6{background:#F5E1BE}.z7{background:#E8787C}.z8{background:#A8D8EA}
+.zone .k{font-family:var(--f-head);font-weight:800;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.render-tag{display:inline-block;margin-top:22px;font-size:.85rem;color:var(--ink-soft);border:1px dashed var(--line);border-radius:8px;padding:6px 12px}
+@media (max-width:900px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.shop-grid{grid-template-columns:1fr}.zone{min-height:0}}
+
+/* shorts */
+.shorts{background:var(--ink);color:var(--paper)}
+.shorts .sec-head p{color:color-mix(in srgb,var(--paper) 75%,transparent)}
+.shorts .eyebrow{color:var(--mint)}
+.reel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,240px);gap:18px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.reel figure{margin:0;scroll-snap-align:start;display:grid;gap:10px}
+.reel video{width:100%;aspect-ratio:9/16;border-radius:16px;background:#000;display:block;object-fit:cover}
+.reel figcaption{font-family:var(--f-head);font-weight:700;font-size:.95rem}
+.follow{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.shorts .btn{background:var(--paper);color:#2B1712;border-color:var(--paper)}
+.shorts .btn.ghost{background:transparent;color:var(--paper)}
+:root[data-theme="dark"] .shorts{background:#120B09}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .shorts{background:#120B09}}
+
+/* story */
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.route{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;gap:28px}
+.stop{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.pin{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-head);font-weight:800;color:#fff}
+.stop:first-child .pin{background:var(--ink-soft)}
+.stop:last-child .pin{background:var(--crust)}
+.miles{font-family:var(--f-head);font-weight:800;font-size:2.2rem;color:var(--mint-ink);padding-left:62px;font-variant-numeric:tabular-nums;border-left:3px dotted var(--line);margin-left:22px;padding-block:6px}
+.miles small{display:block;font-size:.85rem;font-weight:500;color:var(--ink-soft);font-family:var(--f-body)}
+.story p+p{margin-top:14px}
+@media (max-width:780px){.story .wrap{grid-template-columns:1fr}}
+
+.fam{margin:0;position:relative;justify-self:center;width:min(460px,100%)}
+.fam img{width:100%;border-radius:24px;display:block;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.fam figcaption{position:absolute;left:12px;right:12px;bottom:12px;background:var(--card);color:var(--ink);border-radius:999px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--f-head);font-weight:700;font-size:.9rem;flex-wrap:wrap;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.fam .pin{width:32px;height:32px;font-size:.75rem;background:var(--ink-soft)}
+.fam .pin.fl{background:var(--crust)}
+.fam .arrow{color:var(--mint-ink);font-variant-numeric:tabular-nums}
+/* merch */
+.merch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.product{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.product img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#F7EEDF;display:block}
+.product .body{padding:20px;display:grid;gap:10px;align-content:start}
+.product .price{font-family:var(--f-head);font-weight:800;color:var(--crust)}
+.vote{justify-self:start;margin-top:6px}
+.vote[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:#16413D}
+@media (max-width:860px){.merch-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:540px){.merch-grid{grid-template-columns:1fr}}
+
+/* kids */
+.kids{background:var(--butter)}
+.kids .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:center}
+.kids img{border-radius:16px;transform:rotate(2deg);box-shadow:0 18px 40px rgba(0,0,0,.18);max-width:360px;width:100%;justify-self:center}
+@media (max-width:780px){.kids .wrap{grid-template-columns:1fr}}
+
+/* club */
+.club .card{background:var(--crust);color:#fff;border-radius:28px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
+.club .card h2{color:#fff}
+.club .card .script{color:#FFE8C9;font-size:1.4rem}
+.club ul{margin:16px 0 0;padding-left:20px;display:grid;gap:6px}
+.club form{display:grid;gap:12px;background:rgba(255,255,255,.12);padding:22px;border-radius:18px}
+.club label{font-weight:700;font-size:.9rem}
+.club input,.club select{font:inherit;padding:12px 14px;border-radius:12px;border:2px solid transparent;background:#FFFDF8;color:#2B1712;width:100%}
+.club input:focus{border-color:var(--ink);outline:none}
+.club .btn{background:#2B1712;border-color:#2B1712;color:#fff;justify-self:start}
+.club .msg{font-weight:700;min-height:1.5em}
+.club .sticker{position:absolute;right:-30px;top:-30px;width:150px;opacity:.9;transform:rotate(14deg)}
+@media (max-width:780px){.club .card{grid-template-columns:1fr}.club .sticker{width:100px;right:-20px;top:-20px}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:40px;font-size:.92rem;color:var(--ink-soft)}
+footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:start}
+footer img{width:72px}
+footer h4{font-family:var(--f-head);color:var(--ink);margin:0 0 8px;font-size:.95rem}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.cols{display:flex;flex-wrap:wrap;gap:40px}
+@media (max-width:700px){footer .wrap{grid-template-columns:1fr}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="notice"><div class="wrap"><b>Coming soon to St. Augustine!</b> Follow along for opening news.</div></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/logo-sm.png" alt="">PieconicFL</a>
+    <ul>
+      <li><a href="#stuffanada">Stuffanada</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#shop">The Shop</a></li>
+      <li><a href="#shorts">Videos</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#merch">Merch</a></li>
+    </ul>
+    <a class="btn" href="#club">Join the Pie Club</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="chip"><i></i>Coming soon to St. Augustine, FL</div>
+      <h1>A place where <span>magic happens.</span></h1>
+      <p class="lede">Handwrought pies, empanadas and our one-of-a-kind Stuffanada, plus ice cream, candy and arcade fun for the whole family. Hudson Valley born. Florida baked.</p>
+      <div class="ctas">
+        <a class="btn" href="#club">Join the Founding Pie Club</a>
+        <a class="btn ghost" href="#shorts">Watch our shorts</a>
+      </div>
+    </div>
+    <div class="badge">
+      <img src="img/logo.png" alt="PieconicFL badge: a lattice pie with a slice missing, ringed by the words Handwrought St. Augustine Pies and Baked Goods">
+      <div class="stamp">Coming soon!</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>Hudson Valley born</span><em>✦</em><span>Florida baked</span><em>✦</em><span>Home of the Stuffanada</span><em>✦</em><span>Will travel for pie</span><em>✦</em><span>From the Hudson to the Matanzas</span><em>✦</em><span>Something golden is coming</span><em>✦</em>
+  <span>Hudson Valley born</span><em>✦</em><span>Florida baked</span><em>✦</em><span>Home of the Stuffanada</span><em>✦</em><span>Will travel for pie</span><em>✦</em><span>From the Hudson to the Matanzas</span><em>✦</em><span>Something golden is coming</span><em>✦</em>
+</div></div>
+
+<section class="stuff" id="stuffanada">
+  <div class="wrap">
+    <figure><img src="img/p-stuffanadas.jpg" alt="Two golden Stuffanadas, one broken open to show a cheesy savory meat filling"><figcaption>Bigger. Bolder. Stuffed.</figcaption></figure>
+    <div>
+      <p class="eyebrow">Our signature</p>
+      <h2>Meet the <span class="script">Stuffanada</span></h2>
+      <div class="equation" aria-label="Muffin plus empanada equals Stuffanada">
+        <span class="t">Muffin</span><span>+</span><span class="t">Empanada</span><span>=</span><span class="t win">Stuffanada</span>
+      </div>
+      <p>A golden, hand-crimped crust baked in a muffin shape and stuffed all the way through with a savory filling. You won't find it anywhere else.</p>
+      <ul>
+        <li>Made by hand, one at a time</li>
+        <li>All-butter crust, no shortcuts</li>
+        <li>Family recipes with Latin heart</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The menu board</p>
+      <h2>Sweet, savory, and stuffed</h2>
+      <p>A first look at what we bake. Prices and the full opening menu come closer to opening day.</p>
+    </div>
+    <div class="board">
+      <div class="col">
+        <img src="img/p-stuffanadas.jpg" alt="Golden Stuffanada broken open">
+        <h3>Stuffanadas</h3><p class="sub">Our signature</p>
+        <div class="item"><b>Savory Stuffanada</b><span class="dots"></span><small>signature</small></div>
+        <div class="item"><b>Flavor of the week</b><span class="dots"></span><small>rotating</small></div>
+      </div>
+      <div class="col">
+        <img src="img/p-pies.jpg" alt="Lattice berry pie">
+        <h3>Pies</h3><p class="sub">Whole pies and slices</p>
+        <div class="item"><b>Backyard Apple</b><span class="dots"></span><small>lattice</small></div>
+        <div class="item"><b>Lemon Chess</b><span class="dots"></span><small>classic</small></div>
+        <div class="item"><b>Bold Balsamic Mixed Berry</b><span class="dots"></span></div>
+        <div class="item"><b>Seasonal specials</b><span class="dots"></span><small>rotating</small></div>
+      </div>
+      <div class="col">
+        <img src="img/p-empanadas.jpg" alt="Crimped empanada cut open">
+        <h3>Empanadas</h3><p class="sub">Sweet or savory?</p>
+        <div class="item"><b>Apple</b><span class="dots"></span><small>sweet</small></div>
+        <div class="item"><b>Peach</b><span class="dots"></span><small>sweet</small></div>
+        <div class="item"><b>Mixed Balsamic Berry</b><span class="dots"></span><small>sweet</small></div>
+        <div class="item"><b>Cuban</b><span class="dots"></span><small>savory</small></div>
+        <div class="item"><b>Puerto Rican-style Meat</b><span class="dots"></span><small>savory</small></div>
+      </div>
+      <div class="col">
+        <img src="img/p-handpies.jpg" alt="Glazed berry hand pies">
+        <h3>Hand Pies</h3><p class="sub">Pie you can carry</p>
+        <div class="item"><b>Apple hand pie</b><span class="dots"></span></div>
+        <div class="item"><b>More flavors</b><span class="dots"></span><small>coming soon</small></div>
+      </div>
+      <div class="col">
+        <img src="img/p-cheesecakes.jpg" alt="Cheesecake topped with fresh berries">
+        <h3>Cheesecakes</h3><p class="sub">Whole and by the slice</p>
+        <div class="item"><b>Flavors</b><span class="dots"></span><small>coming soon</small></div>
+      </div>
+      <div class="col">
+        <img src="img/p-quiche.jpg" alt="Spinach quiche with a slice cut">
+        <h3>Quiche</h3><p class="sub">Breakfast and lunch</p>
+        <div class="item"><b>Flavors</b><span class="dots"></span><small>coming soon</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Our dream shop</p>
+      <h2>An old-school malt shop with a modern twist</h2>
+      <p>50s diner meets 80s arcade meets today's gaming, decorated floor to ceiling. Walk the magic circle counter: baked goods, then ice cream, then the hot menu, then pay and pick up.</p>
+    </div>
+    <figure class="wide"><img src="img/shop-wide.jpg" alt="3D view of the whole shop: the round magic circle counter, diner booths and arcade, with the family and pups"><figcaption>The magic circle: baked goods, ice cream, hot menu, then pay and pick up.</figcaption></figure>
+    <div class="views">
+      <figure><img src="img/shop-pastry.jpg" alt="3D view: Pastry case"><figcaption><b>Pastry case</b>Stuffanadas, pies and empanadas in the circle counter.</figcaption></figure>
+      <figure><img src="img/shop-icecream.jpg" alt="3D view: Ice cream &amp; cereal bar"><figcaption><b>Ice cream &amp; cereal bar</b>Toppings, cereal mix-ins, cups, cones and shakes.</figcaption></figure>
+      <figure><img src="img/shop-diner.jpg" alt="3D view: Diner booths"><figcaption><b>Diner booths</b>Jukebox tables on a checkerboard floor.</figcaption></figure>
+      <figure><img src="img/shop-arcade.jpg" alt="3D view: Arcade &amp; dance floor"><figcaption><b>Arcade &amp; dance floor</b>80s cabinets, gaming and a light-up floor.</figcaption></figure>
+      <figure><img src="img/shop-candy.jpg" alt="3D view: Candy wall"><figcaption><b>Candy wall</b>Floor-to-ceiling candy jars and trading cards.</figcaption></figure>
+      <figure><img src="img/shop-selfie.jpg" alt="3D view: Neon selfie wall"><figcaption><b>Neon selfie wall</b>"A place where magic happens," in lights.</figcaption></figure>
+    </div>
+    <p class="render-tag">Shop coming soon. These are 3D renderings of our plan, and we'll share the location when it's signed.</p>
+  </div>
+</section>
+
+<section class="shorts" id="shorts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Watch</p>
+      <h2>Pie shorts, fresh from the oven</h2>
+      <p>Tap any video to play. New shorts every week on YouTube, TikTok, Instagram and Facebook.</p>
+    </div>
+    <div class="reel">
+      <figure><video controls preload="none" playsinline poster="video/baking-01-what-is-a-stuffanada.jpg" src="video/baking-01-what-is-a-stuffanada.mp4"></video><figcaption>What is a Stuffanada?</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="video/baking-02-lattice-pie-in-20-seconds.jpg" src="video/baking-02-lattice-pie-in-20-seconds.mp4"></video><figcaption>Lattice pie in 20 seconds</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="video/baking-03-our-empanada-flavors.jpg" src="video/baking-03-our-empanada-flavors.mp4"></video><figcaption>Our empanada flavors</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="video/baking-04-hudson-valley-to-st-augustine.jpg" src="video/baking-04-hudson-valley-to-st-augustine.mp4"></video><figcaption>Hudson Valley to St. Augustine</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="video/baking-05-guess-the-pie.jpg" src="video/baking-05-guess-the-pie.mp4"></video><figcaption>Guess the pie</figcaption></figure>
+      <figure><video controls preload="none" playsinline poster="video/baking-14-something-golden-is-coming.jpg" src="video/baking-14-something-golden-is-coming.mp4"></video><figcaption>Something golden is coming</figcaption></figure>
+    </div>
+    <div class="follow">
+      <a class="btn" href="https://www.youtube.com/@JaydenBerrios-616" target="_blank" rel="noopener">Subscribe on YouTube</a>
+      <a class="btn ghost" href="https://www.facebook.com/profile.php?id=61594752480780" target="_blank" rel="noopener">Follow on Facebook</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@harberr616" target="_blank" rel="noopener">TikTok</a>
+      <a class="btn ghost" href="https://www.instagram.com/harberr616" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Our story</p>
+      <h2>Same family recipes. <span class="script">New Florida home.</span></h2>
+      <p style="margin-top:18px">Pieconic started as a family bakery in Chatham, New York, in the heart of the Hudson Valley, crimping every crust by hand with local fruit and no shortcuts.</p>
+      <p>Now we're bringing those recipes south to America's oldest city, adding the Cuban and Puerto Rican-style empanadas we grew up on, and building a shop where families come back again and again.</p>
+    </div>
+    <figure class="fam">
+      <img src="img/family.jpg" alt="3D animated family behind a bakery counter full of pies, with Daisy, Fisher and Harley in front">
+      <figcaption><span class="pin">NY</span> Chatham <span class="arrow">~1,000 mi</span> St. Augustine <span class="pin fl">FL</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<section class="merch" id="merch">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">First merch drop</p>
+      <h2>Wear the home of the Stuffanada</h2>
+      <p>Our first line is coming soon. Vote for the one you want and we'll print it first.</p>
+    </div>
+    <div class="merch-grid">
+      <article class="product">
+        <img src="img/tee1.jpg" alt="Sand tee with the PieconicFL badge on the chest and Home of the Stuffanada on the back">
+        <div class="body"><h3>Home of the Stuffanada Tee</h3><p>Badge on the chest, "Home of the Stuffanada" across the back.</p><p class="price">$30 · coming soon</p><button class="btn ghost vote" id="vote-tee1" type="button" aria-pressed="false">Vote for this one</button></div>
+      </article>
+      <article class="product">
+        <img src="img/tee2.jpg" alt="Tee with a steaming cartoon Stuffanada on the chest and Stuffanadas arched over the badge on the back">
+        <div class="body"><h3>Stuffanadas Arch Tee</h3><p>A steaming Stuffanada on the chest, our badge on the back.</p><p class="price">$32 · coming soon</p><button class="btn ghost vote" id="vote-tee2" type="button" aria-pressed="false">Vote for this one</button></div>
+      </article>
+      <article class="product">
+        <img src="img/merch.jpg" alt="Merch line preview: tees, a Will Travel for Pie tote, a mug and stickers">
+        <div class="body"><h3>Tote, mug &amp; stickers</h3><p>"Will Travel for Pie" tote, a "Coffee &amp; a Slice of Pie" mug and stickers.</p><p class="price">Coming soon</p><button class="btn ghost vote" id="vote-more" type="button" aria-pressed="false">Vote for this one</button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="kids" id="kids">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Kids corner</p>
+      <h2>Free PieconicFL Fun Page</h2>
+      <p style="margin-top:16px">Help Harley find the Stuffanada, hunt for the Pieconic words, and color the treats. Print it at home and tag us with your little one's masterpiece.</p>
+      <p style="margin-top:20px"><a class="btn" href="#club">Get it by email</a></p>
+    </div>
+    <img src="img/kids.jpg" alt="PieconicFL kids activity page with a maze, word search and treats to color">
+  </div>
+</section>
+
+<section class="club" id="club">
+  <div class="wrap">
+    <div class="card">
+      <img class="sticker" src="img/sticker.png" alt="">
+      <div>
+        <p class="script">Be first in line</p>
+        <h2>Join the Founding Pie Club</h2>
+        <ul>
+          <li>Opening-day news before anyone else</li>
+          <li>First dibs on our merch drop</li>
+          <li>Opening-day perks for founding members</li>
+          <li>Vote on new flavors for the menu</li>
+        </ul>
+      </div>
+      <form id="club-form" novalidate>
+        <div><label for="club-name">First name</label><input id="club-name" name="name" autocomplete="given-name" placeholder="Your name"></div>
+        <div><label for="club-email">Email</label><input id="club-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+        <div><label for="club-fav">Most excited for</label>
+          <select id="club-fav" name="fav"><option>Stuffanadas</option><option>Pies</option><option>Empanadas</option><option>Ice cream &amp; arcade</option></select></div>
+        <button class="btn" type="submit">Count me in</button>
+        <p class="msg" id="club-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo.png" alt="PieconicFL">
+    <div class="cols">
+      <div><h4>PieconicFL</h4><ul><li>Coming soon to St. Augustine, FL</li><li>Sister bakery: PieconicNY, Chatham, NY</li></ul></div>
+      <div><h4>Follow</h4><ul>
+        <li><a href="https://www.facebook.com/profile.php?id=61594752480780" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.youtube.com/@JaydenBerrios-616" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://www.tiktok.com/@harberr616" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://www.instagram.com/harberr616" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#menu">Menu</a></li><li><a href="#shop">The Shop</a></li><li><a href="#merch">Merch</a></li><li><a href="#kids">Kids corner</a></li></ul></div>
+    </div>
+    <p>© 2026 PieconicFL</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.vote').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.vote').forEach(function(o){o.setAttribute('aria-pressed','false');o.textContent='Vote for this one';});
+    b.setAttribute('aria-pressed','true');b.textContent='Your pick ✓';
+  });
+});
+document.getElementById('club-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var em=document.getElementById('club-email'),msg=document.getElementById('club-msg');
+  if(!/^\S+@\S+\.\S+$/.test(em.value)){msg.textContent='Please enter an email address like you@example.com.';em.focus();return;}
+  msg.textContent='Thanks! Sign-ups open very soon. For now, follow us on Facebook for opening news.';
+});
+</script>
+
+</body>
+</html>
